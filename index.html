@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bao & Tiny World | Miniature Houses, Toys & Accessories</title>
+  <meta name="description"
+    content="Explore and buy premium hand-crafted Japanese miniature houses, traditional wooden toys, and modeling accessories. Enjoy sky-blue Japanese design, fast checkout, and worldwide delivery.">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Telegram Web App SDK -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+
+<body>
+
+  <!-- Loading Screen Overlay -->
+  <div class="loading-overlay" id="loading-overlay">
+    <div class="spinner"></div>
+    <div class="loading-text">Bao & Tiny World...</div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="navbar" id="navbar">
+      <a href="#" class="brand-container" id="nav-brand">
+        <img src="images/logo.png" alt="Bao & Tiny World Logo" class="brand-logo-img">
+        <div class="brand-text">
+          <span class="brand-en">Bao & Tiny World</span>
+          <span class="brand-jp">バオ＆タイニーワールド</span>
+        </div>
+      </a>
+
+      <!-- Desktop Search Bar -->
+      <div class="nav-search-container">
+        <button class="nav-search-btn" aria-label="Search button"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <input type="text" class="nav-search-input" id="search-input" placeholder="Search miniature houses, toys...">
+      </div>
+
+      <!-- 
+      <div class="nav-actions">
+        <button class="cart-trigger" id="cart-trigger" aria-label="Open Shopping Cart">
+          <i class="fa-solid fa-basket-shopping"></i>
+          <span class="cart-badge" id="cart-badge-count">0</span>
+        </button>
+      </div> 
+      -->
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero-section">
+    <canvas id="hero-canvas" class="hero-canvas"></canvas>
+    <div class="hero-slideshow" id="hero-slideshow">
+      <img src="images/hero_banner.png" alt="Bao & Tiny World Japanese Miniature Street Scene Banner 1"
+        class="hero-banner-img active">
+      <img src="images/hero_banner_2.png" alt="Bao & Tiny World Japanese Miniature Street Scene Banner 2"
+        class="hero-banner-img">
+      <img src="images/hero_banner_3.png" alt="Bao & Tiny World Japanese Miniature Street Scene Banner 2"
+        class="hero-banner-img">
+      <img src="images/hero_banner_4.png" alt="Bao & Tiny World Japanese Miniature Street Scene Banner 2"
+        class="hero-banner-img">
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-tag">Aesthetic Miniature Craft</div>
+      <h1 class="hero-title">Step Into A <span>Tiny World</span></h1>
+      <p class="hero-jp-title">日本の伝統美を手のひらに</p>
+      <p class="hero-desc">Experience the intricate beauty of Japan in miniature. From traditional Kyoto Machiya houses
+        and hand-carved Kokeshi toys to LED accessories, build your own dream garden or streetscape.</p>
+      <button class="hero-btn" id="hero-cta-btn">
+        <span>Explore Collection</span>
+        <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </div>
+  </section>
+
+  <!-- Shop Container -->
+  <main class="shop-container" id="shop-catalog">
+
+    <div class="section-header">
+      <span class="section-jp-subtitle">製品コレクション</span>
+      <h2 class="section-title">Our Collection</h2>
+    </div>
+
+    <!-- Filters & Sort Bar -->
+    <section class="filters-bar" id="filters-toolbar">
+      <!-- Categories -->
+      <div class="filter-categories" id="filter-categories-container">
+        <button class="filter-btn active" data-category="all" id="btn-cat-all">
+          <i class="fa-solid fa-border-all"></i> All Products
+        </button>
+        <button class="filter-btn" data-category="houses" id="btn-cat-houses">
+          <i class="fa-solid fa-house-chimney"></i> Houses
+        </button>
+        <button class="filter-btn" data-category="toys" id="btn-cat-toys">
+          <i class="fa-solid fa-puzzle-piece"></i> Toys
+        </button>
+        <button class="filter-btn" data-category="accessories" id="btn-cat-accessories">
+          <i class="fa-solid fa-shapes"></i> Accessories
+        </button>
+        <button class="filter-btn" data-category="gadgets" id="btn-cat-gadgets">
+          <i class="fa-solid fa-screwdriver-wrench"></i> Hobby Gadgets
+        </button>
+      </div>
+
+      <!-- Sorting -->
+      <div class="sort-container">
+        <label for="sort-select" class="sort-label">Sort By:</label>
+        <select class="sort-select" id="sort-select">
+          <option value="featured">Featured</option>
+          <option value="price-low">Price: Low to High</option>
+          <option value="price-high">Price: High to Low</option>
+          <option value="rating">Rating</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- Product Cards Grid -->
+    <section class="products-grid" id="products-grid-list"></section>
+  </main>
+
+  <!-- Cart Drawer Disabled (Commented out)
+  <div class="cart-overlay" id="cart-drawer-overlay"></div>
+  
+  <aside class="cart-drawer" id="cart-drawer-panel" aria-label="Shopping Cart Drawer">
+    <div class="cart-header">
+      <div class="cart-title">
+        <i class="fa-solid fa-basket-shopping"></i>
+        Shopping Cart <span>(ショッピングカート)</span>
+      </div>
+      <button class="close-cart-btn" id="close-cart-btn" aria-label="Close cart"><i
+          class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <div class="cart-items-list" id="cart-items-list-container">
+    </div>
+
+    <div class="cart-footer">
+      <div class="cart-totals">
+        <div class="cart-total-row">
+          <span>Items Subtotal</span>
+          <span id="cart-subtotal">$0.00</span>
+        </div>
+        <div class="cart-total-row">
+          <span>Delivery Charge</span>
+          <span id="cart-shipping">Free</span>
+        </div>
+        <div class="cart-total-row grand-total">
+          <span>Total Order</span>
+          <span id="cart-grand-total">$0.00</span>
+        </div>
+      </div>
+      <button class="checkout-btn" id="cart-checkout-btn" disabled>
+        <i class="fa-solid fa-wallet"></i>
+        <span>Proceed to Checkout</span>
+      </button>
+    </div>
+  </aside>
+  -->
+
+  <!-- MODAL: Product Detail View -->
+  <div class="modal-overlay" id="detail-modal-overlay">
+    <div class="modal-box" style="max-width: 800px;">
+      <button class="close-modal-btn" id="close-detail-modal" aria-label="Close modal"><i
+          class="fa-solid fa-xmark"></i></button>
+      <div class="detail-grid" id="detail-modal-content">
+        <!-- Dynamically rendered detailed info -->
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Product Inquiry Form -->
+  <div class="modal-overlay" id="checkout-modal-overlay">
+    <div class="modal-box">
+      <button class="close-modal-btn" id="close-checkout-modal" aria-label="Close checkout"><i
+          class="fa-solid fa-xmark"></i></button>
+
+      <div class="modal-header">
+        <h2>Product Inquiry</h2>
+        <p id="inquiry-modal-product-info">Inquire about our premium miniature collection.</p>
+      </div>
+
+      <div class="modal-body">
+        <div class="inquiry-channels">
+          <a href="https://t.me/+nW4oMXxto8hjMmY9" target="_blank" rel="noopener noreferrer" class="channel-btn channel-tg" id="inquiry-tg-link">
+            <i class="fa-brands fa-telegram"></i>
+            <div class="channel-text">
+              <span class="channel-title">Inquire on Telegram</span>
+              <span class="channel-desc">Join our channel & chat with seller</span>
+            </div>
+            <i class="fa-solid fa-chevron-right channel-arrow"></i>
+          </a>
+          <a href="https://www.facebook.com/share/19CB7BrN8Q/" target="_blank" rel="noopener noreferrer" class="channel-btn channel-fb" id="inquiry-fb-link">
+            <i class="fa-brands fa-facebook"></i>
+            <div class="channel-text">
+              <span class="channel-title">Inquire on Facebook</span>
+              <span class="channel-desc">Visit our Facebook page to message us</span>
+            </div>
+            <i class="fa-solid fa-chevron-right channel-arrow"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Inquiry Placement Success -->
+  <div class="modal-overlay" id="success-modal-overlay">
+    <div class="modal-box" style="max-width: 550px;">
+      <div class="success-box">
+        <div class="success-icon-container" style="background: #f0fdfa; color: #0d9488; border-color: #99f6e4;">
+          <i class="fa-solid fa-paper-plane"></i>
+        </div>
+        <h2>Inquiry Sent!</h2>
+        <p>Thank you! Your product inquiry has been submitted successfully. The seller will get back to you shortly.</p>
+
+        <div class="success-receipt" id="success-receipt-box">
+          <!-- Dynamically populated inquiry details -->
+        </div>
+
+        <button class="success-btn" id="success-done-btn">Back to Catalog</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Admin Login Prompt -->
+  <div class="modal-overlay" id="login-modal-overlay">
+    <div class="modal-box" style="max-width: 400px;">
+      <button class="close-modal-btn" id="close-login-modal" aria-label="Close login"><i class="fa-solid fa-xmark"></i></button>
+      
+      <div class="modal-header" style="text-align: center;">
+        <h2>Admin Authentication</h2>
+        <p>Enter details to access the Store Admin Console.</p>
+      </div>
+
+      <div class="modal-body" style="padding-top: 1rem;">
+        <form class="checkout-form" id="admin-login-form">
+          <div class="form-group">
+            <label for="login-username">Username</label>
+            <input type="text" class="form-control" id="login-username" required placeholder="e.g., admin">
+          </div>
+          <div class="form-group">
+            <label for="login-password">Password</label>
+            <input type="password" class="form-control" id="login-password" required placeholder="••••••••">
+          </div>
+          <button type="submit" class="submit-order-btn" style="margin-top: 10px;">
+            <i class="fa-solid fa-lock-open"></i> Login
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Integrations Setup & Store Admin Console -->
+  <div class="modal-overlay" id="config-modal-overlay">
+    <div class="modal-box" style="max-width: 800px;">
+      <button class="close-modal-btn" id="close-config-modal" aria-label="Close configuration"><i
+          class="fa-solid fa-xmark"></i></button>
+
+      <div class="modal-header">
+        <h2>Store Administration</h2>
+        <p>Manage customer orders and configure API notifications.</p>
+
+        <!-- Admin Tab Buttons -->
+        <div class="admin-tabs" style="display: flex; gap: 10px; margin-top: 15px; border-bottom: 1px solid var(--border-light); padding-bottom: 5px;">
+          <button type="button" class="admin-tab-btn active" id="tab-btn-orders">
+            <i class="fa-solid fa-list-check"></i> Orders History
+          </button>
+          <button type="button" class="admin-tab-btn" id="tab-btn-settings">
+            <i class="fa-solid fa-sliders"></i> API Integrations
+          </button>
+        </div>
+      </div>
+
+      <div class="modal-body" style="padding-top: 1.5rem;">
+
+        <!-- PANEL 1: Orders Log -->
+        <div class="admin-panel active" id="panel-orders">
+          <div class="orders-list-wrapper" id="orders-list-wrapper" style="display: flex; flex-direction: column; gap: 15px; max-height: 480px; overflow-y: auto; padding-right: 5px;">
+            <!-- Dynamically populated from local storage in app.js -->
+          </div>
+        </div>
+
+        <!-- PANEL 2: API Connection Settings -->
+        <div class="admin-panel" id="panel-settings">
+          <!-- Telegram Bot Settings -->
+          <div class="config-section">
+            <div class="config-section-header">
+              <i class="fa-brands fa-telegram" style="color: #229ED9;"></i> Telegram Bot Connection
+            </div>
+            <div class="config-section-body">
+              <div class="form-group">
+                <label for="config-tg-token">Telegram Bot Token</label>
+                <input type="password" class="form-control" id="config-tg-token"
+                  placeholder="123456789:ABCdefGhIJKlmNoPQRsTUVwxyZ">
+              </div>
+              <div class="form-group">
+                <label for="config-tg-chatid">Telegram Chat ID / Channel ID</label>
+                <input type="text" class="form-control" id="config-tg-chatid"
+                  placeholder="e.g. -1001234567890 or 987654321">
+              </div>
+              <div class="info-note">
+                <i class="fa-solid fa-circle-info"></i>
+                <span>Ensure your bot is added as an administrator to your channel/group, or that you have sent `/start`
+                  to the bot in a direct chat first.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Email Settings -->
+          <div class="config-section">
+            <div class="config-section-header">
+              <i class="fa-solid fa-envelope" style="color: var(--accent-pink-deep);"></i> EmailJS Notification
+              Integration
+            </div>
+            <div class="config-section-body">
+              <div class="form-group">
+                <label for="config-emailjs-service">EmailJS Service ID</label>
+                <input type="text" class="form-control" id="config-emailjs-service" placeholder="service_xxxxxx">
+              </div>
+              <div class="form-group">
+                <label for="config-emailjs-template">EmailJS Template ID</label>
+                <input type="text" class="form-control" id="config-emailjs-template" placeholder="template_xxxxxx">
+              </div>
+              <div class="form-group">
+                <label for="config-emailjs-publickey">EmailJS Public Key</label>
+                <input type="text" class="form-control" id="config-emailjs-publickey" placeholder="user_xxxxxxxxxxxxxx">
+              </div>
+              <div class="form-group">
+                <label for="config-emailjs-recipient">Store Administrator Email (Your Email)</label>
+                <input type="email" class="form-control" id="config-emailjs-recipient"
+                  placeholder="store-owner@domain.com">
+              </div>
+              <div class="info-note">
+                <i class="fa-solid fa-circle-info"></i>
+                <span>Order notifications are sent directly using EmailJS client SDK from the browser. Keep these fields
+                  blank to use standard order mock.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="config-actions">
+            <button type="button" class="form-control" id="config-reset-btn"
+              style="width: auto; background: transparent; cursor: pointer;">Reset Defaults</button>
+            <button type="button" class="config-save-btn" id="config-save-btn">Save Configuration</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- FLOATING ACTION BUTTONS -->
+  <!-- Configuration Trigger Button (Admin gear in corner) -->
+  <button class="config-trigger-btn" id="config-trigger-btn" aria-label="Open Configurations Panel"
+    title="Store API settings">
+    <i class="fa-solid fa-gear"></i>
+  </button>
+
+  <!-- Back to Top Button -->
+  <button class="scroll-top-btn" id="scroll-top-btn" aria-label="Scroll to top" title="Scroll to top">
+    <i class="fa-solid fa-chevron-up"></i>
+  </button>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="brand-container">
+          <img src="images/logo.png" alt="Bao & Tiny World Logo" class="brand-logo-img">
+          <div class="brand-text">
+            <span class="brand-en">Bao & Tiny World</span>
+            <span class="brand-jp">雅ミニストア</span>
+          </div>
+        </a>
+        <p class="footer-desc">Bringing the historic elegance of traditional Japanese architecture and handmade
+          miniatures to hobbyists worldwide.</p>
+      </div>
+
+      <div>
+        <h3 class="footer-title">Product Categories</h3>
+        <ul class="footer-links">
+          <li><a href="#shop-catalog" onclick="filterCategory('houses')">Miniature Houses</a></li>
+          <li><a href="#shop-catalog" onclick="filterCategory('toys')">Toys</a></li>
+          <li><a href="#shop-catalog" onclick="filterCategory('accessories')">Lighting & Decor Accessories</a></li>
+          <li><a href="#shop-catalog" onclick="filterCategory('gadgets')">Hobby Gadgets</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="footer-title">Contact & Support</h3>
+        <div class="footer-contact-row">
+          <i class="fa-solid fa-location-dot"></i>
+          <span>Yangon, Myanmar</span>
+        </div>
+        <div class="footer-contact-row">
+          <i class="fa-brands fa-telegram" style="color: #229ED9;"></i>
+          <a href="https://t.me/+nW4oMXxto8hjMmY9" target="_blank" rel="noopener noreferrer">Telegram Channel</a>
+        </div>
+        <div class="footer-contact-row">
+          <i class="fa-brands fa-facebook" style="color: #1877F2;"></i>
+          <a href="https://www.facebook.com/share/19CB7BrN8Q/" target="_blank" rel="noopener noreferrer">Facebook Page</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Bao & Tiny World Store. All rights reserved. Made with 🤍 Japanese aesthetic style.</p>
+      <div class="footer-socials">
+        <a href="https://www.facebook.com/share/19CB7BrN8Q/" target="_blank" rel="noopener noreferrer" aria-label="Facebook Link"><i class="fa-brands fa-facebook"></i></a>
+        <a href="https://t.me/+nW4oMXxto8hjMmY9" target="_blank" rel="noopener noreferrer" aria-label="Telegram Link"><i class="fa-brands fa-telegram"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Include email JS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+  <!-- JavaScript Files -->
+  <script src="products.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>
