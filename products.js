@@ -3,8 +3,7 @@ const products = [
   {
     id: 1,
     name: "Kyoto Machiya Townhouse",
-    japaneseName: "京都町家タウンハウス",
-    category: "houses",
+    category: "scale-houses",
     price: 0,
     rating: 4.9,
     reviews: 42,
@@ -20,8 +19,7 @@ const products = [
   {
     id: 2,
     name: "Modern Tokyo Glass Loft",
-    japaneseName: "東京ガラスロフト",
-    category: "houses",
+    category: "scale-houses",
     price: 64.99,
     rating: 4.8,
     reviews: 29,
@@ -37,8 +35,7 @@ const products = [
   {
     id: 3,
     name: "Shinto Shrine Sanctuary",
-    japaneseName: "神社の社殿",
-    category: "houses",
+    category: "scale-houses",
     price: 94.99,
     rating: 5.0,
     reviews: 18,
@@ -54,7 +51,6 @@ const products = [
   {
     id: 4,
     name: "Hand-painted Kokeshi Doll Set",
-    japaneseName: "手描きこけし人形",
     category: "toys",
     price: 34.99,
     rating: 4.7,
@@ -71,7 +67,6 @@ const products = [
   {
     id: 5,
     name: "Daruma Fortune Wooden Puzzle",
-    japaneseName: "だるまパズル",
     category: "toys",
     price: 24.99,
     rating: 4.6,
@@ -88,7 +83,6 @@ const products = [
   {
     id: 6,
     name: "Mechanical 5-Tier Pagoda",
-    japaneseName: "木製機械式五重塔",
     category: "toys",
     price: 49.99,
     rating: 4.9,
@@ -105,7 +99,6 @@ const products = [
   {
     id: 7,
     name: "Warm LED Micro-Lighting Kit",
-    japaneseName: "LEDマイクロライト",
     category: "accessories",
     price: 12.99,
     rating: 4.5,
@@ -122,7 +115,6 @@ const products = [
   {
     id: 8,
     name: "Miniature Sakura Bonsai Tree",
-    japaneseName: "ミニ桜盆栽",
     category: "accessories",
     price: 18.99,
     rating: 4.8,
@@ -139,7 +131,6 @@ const products = [
   {
     id: 9,
     name: "Tatami & Tea Table Set",
-    japaneseName: "畳と座卓セット",
     category: "accessories",
     price: 27.99,
     rating: 4.9,

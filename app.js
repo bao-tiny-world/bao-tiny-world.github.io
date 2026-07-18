@@ -300,7 +300,6 @@ function renderProducts() {
   let filtered = products.filter(product => {
     const matchesCategory = activeCategory === 'all' || product.category === activeCategory;
     const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      product.japaneseName.toLowerCase().includes(searchQuery.toLowerCase()) ||
       product.description.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;
   });
@@ -337,7 +336,6 @@ function renderProducts() {
           <div class="product-rating">
             <i class="fa-solid fa-star"></i>
             <strong>${product.rating}</strong> 
-            <span>(${product.reviews} reviews)</span>
           </div>
           <h3 class="product-title" onclick="openProductDetail(${product.id})">${product.name}</h3>
           <p class="product-description">${product.description}</p>
@@ -365,7 +363,6 @@ window.addToCart = function (productId) {
     cart.push({
       id: product.id,
       name: product.name,
-      japaneseName: product.japaneseName,
       price: product.price,
       image: product.image,
       quantity: 1
@@ -420,7 +417,6 @@ function updateCartUI() {
         <div class="cart-item">
           <img src="${item.image}" alt="${item.name}" class="cart-item-img">
           <div class="cart-item-details">
-            <div class="cart-item-jp">${item.japaneseName}</div>
             <div class="cart-item-name">${item.name}</div>
             <div class="cart-item-price">$${item.price.toFixed(2)}</div>
             
