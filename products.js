@@ -21,7 +21,7 @@ const products = [
   },
   {
     id: 2,
-    name: "Cozy Matcha Cottage Miniature Kit",
+    name: "Kyoto Matcha Cottage Shop Miniature DIY Kit",
     category: "scale-houses",
     price: 0,
     rating: 4.9,
@@ -39,18 +39,20 @@ const products = [
   },
   {
     id: 3,
-    name: "Shinto Shrine Sanctuary",
+    name: "Kagawa Udon Noodle Shop Miniature DIY Kit",
     category: "scale-houses",
-    price: 94.99,
-    rating: 5.0,
-    reviews: 18,
-    description: "Recreate the tranquility of a hillside Shinto shrine. This premium kit includes a traditional vermilion Torii gate, stone lanterns, a washing basin (Chozuya), a main hall with intricate roofing, and tiny cherry blossom branches.",
-    images: ["product_images/house.png", "product_images/toy.png"],
+    price: 0,
+    rating: 4.9,
+    reviews: 42,
+    description: "Capture the nostalgic charm of a classic roadside eatery with this delightful DIY wooden miniature kit. Featuring a textured dark-gray tiled roof, weathered faux-wood finishes, and aged stone steps, this kit brings an inviting storefront to life. Complete with a vintage serving counter, miniature ceramic bowls, tiny tabletop accessories, and lifelike potted greenery, it is a perfect weekend project for any craft enthusiast.",
+    images: ["product_images/p3-1.png", "product_images/p3-2.png", "product_images/p3-3.png", "product_images/p3-4.png", "product_images/p3-5.png", "product_images/p3-6.png", "product_images/p3-7.png", "product_images/p3-8.png", "product_images/p3-9.png"],
     specs: {
-      scale: "1:30",
-      size: "24cm x 18cm x 20cm",
-      material: "Cedar wood, Silk flowers, Brass",
-      difficulty: "Expert (18-22 hours)"
+      scale: "1:24",
+      size: "9.5cm x 8.7cm x 10.9cm",
+      material: "Premium 2.5mm Imported MDF Wood",
+      difficulty: "Beginner (0.5-1 hour)",
+      pieces: "103 pieces (+ 3 spare parts)",
+      sheets: "5 wooden sheets"
     }
   },
   {
