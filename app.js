@@ -7,6 +7,7 @@ let searchQuery = '';
 let sortBy = 'featured';
 let activeProduct = null;
 let orders = [];
+let currentDetailSlideIndex = 0;
 
 // Integration Config Settings
 let config = {
@@ -326,11 +327,12 @@ function renderProducts() {
   }
 
   grid.innerHTML = filtered.map(product => {
+    const primaryImage = (product.images && product.images.length > 0) ? product.images[0] : product.image;
     return `
       <article class="product-card" id="product-${product.id}">
         <div class="product-image-container" onclick="openProductDetail(${product.id})">
           <span class="product-category-tag">${product.category}</span>
-          <img src="${product.image}" alt="${product.name}" class="product-image" loading="lazy">
+          <img src="${primaryImage}" alt="${product.name}" class="product-image" loading="lazy">
         </div>
         <div class="product-details">
           <div class="product-rating">
@@ -364,7 +366,7 @@ window.addToCart = function (productId) {
       id: product.id,
       name: product.name,
       price: product.price,
-      image: product.image,
+      image: (product.images && product.images.length > 0) ? product.images[0] : product.image,
       quantity: 1
     });
   }
@@ -472,12 +474,40 @@ window.openProductDetail = function (productId) {
   if (!product) return;
 
   activeProduct = product;
+  currentDetailSlideIndex = 0;
   const content = document.getElementById('detail-modal-content');
   const modal = document.getElementById('detail-modal-overlay');
 
+  const specsHtml = Object.entries(product.specs || {})
+    .map(([key, value]) => `
+        <div class="spec-row">
+          <span class="spec-label">${key.charAt(0).toUpperCase() + key.slice(1)}:</span>
+          <span class="spec-val">${value}</span>
+        </div>
+    `).join('');
+
+  // Support multiple images
+  const images = product.images || [product.image];
+  const slidesHtml = images.map((img, index) => `
+    <img src="${img}" alt="${product.name} Image ${index + 1}" class="detail-slide-img ${index === 0 ? 'active' : ''}" loading="lazy">
+  `).join('');
+
+  const sliderControlsHtml = images.length > 1 ? `
+    <button class="slide-nav-btn prev-slide" onclick="changeDetailSlide(-1)" aria-label="Previous image"><i class="fa-solid fa-chevron-left"></i></button>
+    <button class="slide-nav-btn next-slide" onclick="changeDetailSlide(1)" aria-label="Next image"><i class="fa-solid fa-chevron-right"></i></button>
+    <div class="slide-dots">
+      ${images.map((_, index) => `
+        <span class="slide-dot ${index === 0 ? 'active' : ''}" onclick="setDetailSlide(${index})"></span>
+      `).join('')}
+    </div>
+  ` : '';
+
   content.innerHTML = `
-    <div class="detail-img-container">
-      <img src="${product.image}" alt="${product.name}" class="detail-img">
+    <div class="detail-img-container slider-container">
+      <div class="detail-slides">
+        ${slidesHtml}
+      </div>
+      ${sliderControlsHtml}
     </div>
     <div class="detail-content">
       <h2 class="detail-title">${product.name}</h2>
@@ -485,22 +515,7 @@ window.openProductDetail = function (productId) {
       <p class="detail-description">${product.description}</p>
       
       <div class="detail-specs">
-        <div class="spec-row">
-          <span class="spec-label">Scale:</span>
-          <span class="spec-val">${product.specs.scale}</span>
-        </div>
-        <div class="spec-row">
-          <span class="spec-label">Size:</span>
-          <span class="spec-val">${product.specs.size}</span>
-        </div>
-        <div class="spec-row">
-          <span class="spec-label">Material:</span>
-          <span class="spec-val">${product.specs.material}</span>
-        </div>
-        <div class="spec-row">
-          <span class="spec-label">Difficulty:</span>
-          <span class="spec-val">${product.specs.difficulty}</span>
-        </div>
+        ${specsHtml}
       </div>
 
       <div class="detail-footer" style="flex-direction: column; align-items: flex-start; gap: 12px;">
@@ -513,6 +528,35 @@ window.openProductDetail = function (productId) {
   `;
 
   openModal(modal);
+};
+
+// Detail Slide controllers
+window.changeDetailSlide = function (direction) {
+  const slides = document.querySelectorAll('.detail-slide-img');
+  const dots = document.querySelectorAll('.slide-dot');
+  if (slides.length <= 1) return;
+
+  slides[currentDetailSlideIndex].classList.remove('active');
+  if (dots.length > 0) dots[currentDetailSlideIndex].classList.remove('active');
+
+  currentDetailSlideIndex = (currentDetailSlideIndex + direction + slides.length) % slides.length;
+
+  slides[currentDetailSlideIndex].classList.add('active');
+  if (dots.length > 0) dots[currentDetailSlideIndex].classList.add('active');
+};
+
+window.setDetailSlide = function (index) {
+  const slides = document.querySelectorAll('.detail-slide-img');
+  const dots = document.querySelectorAll('.slide-dot');
+  if (slides.length <= 1) return;
+
+  slides[currentDetailSlideIndex].classList.remove('active');
+  if (dots.length > 0) dots[currentDetailSlideIndex].classList.remove('active');
+
+  currentDetailSlideIndex = index;
+
+  slides[currentDetailSlideIndex].classList.add('active');
+  if (dots.length > 0) dots[currentDetailSlideIndex].classList.add('active');
 };
 
 // Open Inquiry Modal for a specific product

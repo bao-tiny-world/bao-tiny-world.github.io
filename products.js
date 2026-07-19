@@ -2,34 +2,39 @@
 const products = [
   {
     id: 1,
-    name: "Kyoto Machiya Townhouse",
+    name: "Cozy Miniature Dream House DIY Kit",
     category: "scale-houses",
     price: 0,
     rating: 4.9,
     reviews: 42,
-    description: "A detailed replica of a traditional Kyoto wooden townhouse. Features slide-open shoji doors, miniature tatami rooms, a tiny stone garden, and warm LED ceiling lights. Perfect for advanced hobbyists seeking classical Japanese charm.",
-    image: "product_images/house.png",
+    description: "Bring a beautiful architectural masterpiece to life with this premium DIY miniature house kit. Featuring highly detailed, precision-cut furniture, realistic indoor plants, vibrant decor, and warm ambient LED lighting, this kit includes everything you need to build your own pocket-sized sanctuary. Perfect for hobbyists looking for a rewarding, mindful crafting experience.",
+    images: ["product_images/p1-1.png", "product_images/p1-2.png", "product_images/p1-3.png"],
     specs: {
       scale: "1:24",
-      size: "20cm x 15cm x 18cm",
-      material: "Basswood, Fabric, Paper",
-      difficulty: "Advanced (12-15 hours)"
+      size: "XX cm (Please refer to the size details in the image annotations)",
+      material: "Wood, Fabric, Paper, Metal Components",
+      difficulty: "Intermediate to Advanced (12-15 hours)",
+      weight: "0.7 kg",
+      lighting: "LED Light (Requires LR44 batteries)",
+      instructions: "Full-color English manual included"
     }
   },
   {
     id: 2,
-    name: "Modern Tokyo Glass Loft",
+    name: "Cozy Matcha Cottage Miniature Kit",
     category: "scale-houses",
-    price: 64.99,
-    rating: 4.8,
-    reviews: 29,
-    description: "A contemporary Japanese loft featuring double-height glass windows, a modern spiral staircase, miniature anime figurines, a tiny work desk, and a balcony decorated with potted bonsai trees. Includes dust-proof cover.",
-    image: "product_images/house.png",
+    price: 0,
+    rating: 4.9,
+    reviews: 42,
+    description: "Step into a cozy, relaxing afternoon with this charming DIY wooden cottage kit. Designed with warm earth tones, soft whites, and vibrant leaf-green accents, this miniature shop features highly detailed displays including realistic tiny ice cream cones, classic parfaits, and delicate dessert trays. A perfect introduction to the world of scale modeling.",
+    images: ["product_images/p2-1.png", "product_images/p2-2.png", "product_images/p2-3.png", "product_images/p2-4.png", "product_images/p2-5.png", "product_images/p2-6.png", "product_images/p2-7.png"],
     specs: {
       scale: "1:24",
-      size: "18cm x 14cm x 16cm",
-      material: "Plywood, Acrylic, Plastics",
-      difficulty: "Intermediate (8-10 hours)"
+      size: "9.8cm x 8.7cm x 10.3cm",
+      material: "Premium 2.5mm Imported MDF Wood",
+      difficulty: "Beginner (0.5-1 hour)",
+      pieces: "128 pieces (+ 6 spare parts)",
+      sheets: "5 wooden sheets"
     }
   },
   {
@@ -40,7 +45,7 @@ const products = [
     rating: 5.0,
     reviews: 18,
     description: "Recreate the tranquility of a hillside Shinto shrine. This premium kit includes a traditional vermilion Torii gate, stone lanterns, a washing basin (Chozuya), a main hall with intricate roofing, and tiny cherry blossom branches.",
-    image: "product_images/house.png",
+    images: ["product_images/house.png", "product_images/toy.png"],
     specs: {
       scale: "1:30",
       size: "24cm x 18cm x 20cm",
@@ -56,7 +61,7 @@ const products = [
     rating: 4.7,
     reviews: 56,
     description: "A set of three hand-carved, hand-painted traditional Tohoku Kokeshi wooden dolls representing Happiness, Fortune, and Peace. Each doll features unique kimono designs and is made from seasoned cherry wood.",
-    image: "product_images/toy.png",
+    images: ["product_images/toy.png", "product_images/accessory.png"],
     specs: {
       scale: "N/A",
       size: "Height: 8cm - 12cm",
@@ -72,7 +77,7 @@ const products = [
     rating: 4.6,
     reviews: 31,
     description: "An interlocking 3D wooden puzzle forming a traditional Daruma doll. A rewarding brain-teaser. Once completed, you can paint one eye, make a wish, and place it on your desk as a symbol of perseverance.",
-    image: "product_images/toy.png",
+    images: ["product_images/toy.png", "product_images/gadget.png"],
     specs: {
       scale: "N/A",
       size: "9cm x 9cm x 10cm",
@@ -88,7 +93,7 @@ const products = [
     rating: 4.9,
     reviews: 24,
     description: "An incredible gear-driven 3D wooden mechanical puzzle of the iconic Yasaka Pagoda. A wind-up spring mechanism allows the bells to chime and gears to rotate. Fascinating engineering meets classical art.",
-    image: "product_images/toy.png",
+    images: ["product_images/toy.png", "product_images/house.png"],
     specs: {
       scale: "1:50",
       size: "15cm x 15cm x 35cm",
@@ -104,7 +109,7 @@ const products = [
     rating: 4.5,
     reviews: 67,
     description: "Bring your miniature creations to life. Contains 6 ultra-fine copper wire warm-white LED diodes, a pre-wired battery box with an on/off switch, and sticky adhesive dots. Fits perfectly in any miniature house scale.",
-    image: "product_images/accessory.png",
+    images: ["product_images/accessory.png", "product_images/gadget.png"],
     specs: {
       scale: "Universal",
       size: "Wire Length: 30cm per LED",
@@ -120,7 +125,7 @@ const products = [
     rating: 4.8,
     reviews: 49,
     description: "Add a delicate touch of spring. This pre-assembled miniature cherry blossom tree uses synthetic silk petals, real wood twigs, and sits in a glazed blue ceramic pot with fine green moss soil detailing.",
-    image: "product_images/accessory.png",
+    images: ["product_images/accessory.png", "product_images/toy.png"],
     specs: {
       scale: "1:24 / 1:12",
       size: "Height: 12cm",
@@ -136,7 +141,7 @@ const products = [
     rating: 4.9,
     reviews: 35,
     description: "A scale replica set of 4 woven tatami mats, a low wooden tea table, two Zabuton (sitting cushions), and a complete micro ceramic tea set with a teapot and two teacups. Essential detailing for Japanese rooms.",
-    image: "product_images/accessory.png",
+    images: ["product_images/accessory.png", "product_images/house.png"],
     specs: {
       scale: "1:12",
       size: "Mats: 15cm x 7.5cm each",
